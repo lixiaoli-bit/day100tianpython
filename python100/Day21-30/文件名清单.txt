@@ -1,0 +1,12 @@
+21.文件读写和异常处理.md
+22.对象的序列化和反序列化.md
+23.Python读写CSV文件.md
+24.Python读写Excel文件-1.md
+25.Python读写Excel文件-2.md
+26.Python操作Word和PowerPoint文件.md
+27.Python操作PDF文件.md
+28.Python处理图像.md
+29.Python发送邮件和短信.md
+30.正则表达式的应用.md
+res
+文件名清单.txt

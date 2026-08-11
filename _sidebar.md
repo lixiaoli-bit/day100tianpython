@@ -3,7 +3,7 @@
   * [前言](README.md) <!--注意这里是相对路径-->
 
 * 第一个板块
-  * [01.初识Python](./Python-100-Days/Day01-20/01.初识Python.md)
+  * [01.初识Python](./python100/Day01-20/01.初识Python.md)
 <!--   
   * [02.第一个Python程序](./docs/02.第一个Python程序.md)
   * [03.Python语言中的变量](./docs/03.Python语言中的变量.md)
