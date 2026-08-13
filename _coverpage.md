@@ -5,5 +5,6 @@
 
 - Copyright © 2023 阿少社长 All Rights Reserved.
 
-<!-- [阿少社长](https://space.bilibili.com/1100962821) -->
-[开始阅读](README.md)
+[全栈课程前端](https://zero-to-tech.pages.dev/main)
+[全栈课程后端](https://zero-to-tech.pages.dev/backend/hzong.html)
+[100天python开始阅读](README.md)
