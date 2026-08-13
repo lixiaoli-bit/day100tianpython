@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>循环结构 · 课程笔记</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f7f9fc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.03);
+            padding: 48px 56px;
+            transition: all 0.2s;
+        }
+        @media (max-width: 720px) {
+            .container { padding: 28px 20px; border-radius: 24px; }
+        }
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, #0b2b4f, #1e4a76);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 0.2rem;
+            margin-bottom: 0.25rem;
+            border-left: 6px solid #306998;
+            padding-left: 20px;
+        }
+        .subhead {
+            font-size: 1rem;
+            color: #64748b;
+            margin-top: -0.2rem;
+            margin-bottom: 2.2rem;
+            padding-left: 26px;
+            font-weight: 400;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 1.2rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-top: 2.6rem;
+            margin-bottom: 1.2rem;
+            color: #0b2b4f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: "◆";
+            font-size: 1.4rem;
+            color: #ffd43b;
+            font-weight: 300;
+        }
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 0.75rem;
+            color: #1e3a5f;
+        }
+        p { margin-bottom: 1rem; color: #1e293b; }
+        .note {
+            background: #f1f5f9;
+            padding: 1.2rem 1.6rem;
+            border-radius: 18px;
+            border-left: 5px solid #306998;
+            margin: 1.8rem 0;
+            font-size: 0.95rem;
+            color: #1e293b;
+        }
+        .note strong { color: #0b2b4f; }
+        ul, ol { padding-left: 1.8rem; margin-bottom: 1.4rem; }
+        li { margin-bottom: 0.4rem; }
+        .badge {
+            background: #dbeafe;
+            color: #1e4a76;
+            font-weight: 600;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+        .inline-code {
+            background: #eef2f6;
+            padding: 0.2rem 0.6rem;
+            border-radius: 8px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #1e3a5f;
+            border: 1px solid #dce3ec;
+        }
+        .code-block {
+            background: #0b1c2b;
+            color: #e2e8f0;
+            padding: 1.2rem 1.6rem;
+            border-radius: 18px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            border: 1px solid #1e3a5f;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .code-block .cmd { color: #b0d0ff; }
+        .step-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.6rem 1.8rem;
+            margin: 1.8rem 0;
+            border: 1px solid #e2e8f0;
+        }
+        .step-card h4 {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+            color: #0b2b4f;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; gap: 12px; } }
+        .pill {
+            background: #e9edf2;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e3a5f;
+        }
+        hr { border: none; border-top: 1px solid #e2e8f0; margin: 2rem 0; }
+        .footer-note {
+            margin-top: 2.8rem;
+            background: #f1f6fa;
+            padding: 1.4rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            color: #1e3a5f;
+            font-weight: 500;
+            border: 1px solid #dbe4ed;
+        }
+        ul li::marker { color: #306998; }
+        a {
+            color: #1e4a76;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #b9c8da;
+        }
+        a:hover { border-bottom: 2px solid #306998; }
+        .icon-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            margin: 1rem 0 0.5rem 0;
+            align-items: center;
+        }
+        .icon-row .badge { font-size: 0.85rem; }
+        .divider-light { margin: 2rem 0 1.5rem 0; border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🐍 循环结构</h1>
+    <div class="subhead">
+        for-in · while · break · continue · 重复执行的艺术
+    </div>
+
+    <p>我们在写程序的时候，极有可能遇到需要重复执行某条或某些指令的场景。为了应对这些场景，我们可以在 Python 程序中使用循环结构。所谓循环结构，就是程序中控制某条或某些指令重复执行的结构。在 Python 语言中构造循环结构有两种做法，一种是 <span class="inline-code">for-in</span> 循环，另一种是 <span class="inline-code">while</span> 循环。</p>
+
+    <!-- for-in 循环 -->
+    <h2>for-in 循环</h2>
+    <p>如果明确知道循环执行的次数，我们推荐使用 <span class="inline-code">for-in</span> 循环。例如，每隔 1 秒输出一次 “hello, world”，持续 1 小时：</p>
+    <div class="code-block">
+        <span class="cmd"># 使用 for-in 循环重复 3600 次</span>
+        import time
+        for _ in range(3600):
+            print('hello, world')
+            time.sleep(1)
+    </div>
+    <div class="note">
+        <strong>💡 range 函数用法：</strong><br>
+        • <span class="inline-code">range(101)</span> → 0~100<br>
+        • <span class="inline-code">range(1, 101)</span> → 1~100（左闭右开）<br>
+        • <span class="inline-code">range(1, 101, 2)</span> → 1,3,5,...,99（步长2）<br>
+        • <span class="inline-code">range(100, 0, -2)</span> → 100,98,...,2（递减）
+    </div>
+
+    <div class="step-card">
+        <h4>📐 例：1 到 100 求和</h4>
+        <div class="code-block">
+            total = 0
+            for i in range(1, 101):
+                total += i
+            print(total)  # 5050
+        </div>
+    </div>
+
+    <div class="step-card">
+        <h4>📐 例：1 到 100 偶数求和</h4>
+        <div class="code-block">
+            total = 0
+            for i in range(2, 101, 2):
+                total += i
+            print(total)
+        </div>
+        <p>更简洁的方式：<span class="inline-code">print(sum(range(2, 101, 2)))</span></p>
+    </div>
+
+    <!-- while 循环 -->
+    <h2>while 循环</h2>
+    <p>如果要构造循环结构但是又不能确定循环重复的次数，我们推荐使用 <span class="inline-code">while</span> 循环。它通过布尔值或能产生布尔值的表达式来控制循环，当条件为 <span class="inline-code">True</span> 时循环体重复执行，为 <span class="inline-code">False</span> 时结束。</p>
+    <div class="code-block">
+        <span class="cmd"># while 循环实现 1 到 100 求和</span>
+        total = 0
+        i = 1
+        while i <= 100:
+            total += i
+            i += 1
+        print(total)
+    </div>
+
+    <!-- break 和 continue -->
+    <h2>break 与 continue</h2>
+    <div class="grid-2">
+        <div style="background: #f8fafc; padding: 1.2rem 1.4rem; border-radius: 20px; border:1px solid #e2e8f0;">
+            <h4 style="margin-top:0;">⛔ break</h4>
+            <p>终止当前循环结构，跳出循环。</p>
+            <div class="code-block" style="margin:0.4rem 0; font-size:0.8rem;">
+                while True:
+                    if i > 100:
+                        break
+                    total += i
+                    i += 2
+            </div>
+        </div>
+        <div style="background: #f8fafc; padding: 1.2rem 1.4rem; border-radius: 20px; border:1px solid #e2e8f0;">
+            <h4 style="margin-top:0;">⏭️ continue</h4>
+            <p>跳过本轮循环后续代码，直接进入下一轮。</p>
+            <div class="code-block" style="margin:0.4rem 0; font-size:0.8rem;">
+                for i in range(1, 101):
+                    if i % 2 != 0:
+                        continue
+                    total += i
+            </div>
+        </div>
+    </div>
+
+    <!-- 嵌套循环 -->
+    <h2>嵌套循环</h2>
+    <p>循环结构可以嵌套，即循环体内部还可以包含循环。下面的例子通过嵌套循环输出乘法口诀表（九九表）。</p>
+    <div class="code-block">
+        for i in range(1, 10):
+            for j in range(1, i + 1):
+                print(f'{i}×{j}={i * j}', end='\t')
+            print()
+    </div>
+    <div class="note">
+        <strong>📌 输出效果：</strong> 外层循环控制行，内层循环控制列，每行结束后通过 <span class="inline-code">print()</span> 换行。
+    </div>
+
+    <!-- 应用实例 -->
+    <h2>应用实例</h2>
+
+    <div class="step-card">
+        <h4>🔢 例1：判断素数</h4>
+        <p>输入大于 1 的正整数，判断是否为素数（只能被 1 和自身整除）。</p>
+        <div class="code-block">
+            num = int(input('请输入一个正整数: '))
+            end = int(num ** 0.5)
+            is_prime = True
+            for i in range(2, end + 1):
+                if num % i == 0:
+                    is_prime = False
+                    break
+            print(f'{num}是素数' if is_prime else f'{num}不是素数')
+        </div>
+    </div>
+
+    <div class="step-card">
+        <h4>📐 例2：最大公约数（欧几里得算法）</h4>
+        <p>输入两个正整数，用辗转相除法求最大公约数。</p>
+        <div class="code-block">
+            x = int(input('x = '))
+            y = int(input('y = '))
+            while y % x != 0:
+                x, y = y % x, x
+            print(f'最大公约数: {x}')
+        </div>
+        <div class="note" style="margin-top:0.6rem;">
+            <strong>⚡ 算法对比：</strong> 从大到小遍历效率低，欧几里得算法（辗转相除法）更快，尤其适用于大数互质的情况。
+        </div>
+    </div>
+
+    <div class="step-card">
+        <h4>🎯 例3：猜数字游戏</h4>
+        <p>计算机生成 1~100 随机数，玩家猜数字，提示“大一点”或“小一点”，猜中后显示次数。</p>
+        <div class="code-block">
+            import random
+            answer = random.randrange(1, 101)
+            counter = 0
+            while True:
+                counter += 1
+                num = int(input('请输入: '))
+                if num < answer:
+                    print('大一点.')
+                elif num > answer:
+                    print('小一点.')
+                else:
+                    print('猜对了!')
+                    break
+            print(f'你一共猜了{counter}次.')
+        </div>
+        <div class="icon-row">
+            <span class="badge">random.randrange</span>
+            <span class="badge">无限循环 + break</span>
+            <span class="badge">计数器</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>📌 总结</h2>
+    <ul style="font-size: 1.05rem; list-style-type: '✓   '; padding-left: 2rem;">
+        <li style="margin-bottom: 0.6rem;"><strong>明确次数 → <span class="inline-code">for-in</span></strong>；<strong>不确定次数 → <span class="inline-code">while</span></strong>。</li>
+        <li style="margin-bottom: 0.6rem;"><span class="inline-code">break</span> 终止整个循环，<span class="inline-code">continue</span> 跳过本轮后续代码。</li>
+        <li style="margin-bottom: 0.6rem;">循环可以嵌套，如打印九九乘法表。</li>
+        <li style="margin-bottom: 0.6rem;">应用实例：素数判断、最大公约数（欧几里得算法）、猜数字游戏。</li>
+    </ul>
+
+    <div class="footer-note">
+        🚀 循环结构让程序拥有强大的重复执行能力，结合分支结构，可以解决绝大多数实际问题！
+    </div>
+
+</div>
+</body>
+</html>

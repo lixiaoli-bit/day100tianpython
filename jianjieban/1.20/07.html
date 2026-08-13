@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分支与循环实战 · 课程笔记</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f7f9fc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.03);
+            padding: 48px 56px;
+            transition: all 0.2s;
+        }
+        @media (max-width: 720px) {
+            .container { padding: 28px 20px; border-radius: 24px; }
+        }
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, #0b2b4f, #1e4a76);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 0.2rem;
+            margin-bottom: 0.25rem;
+            border-left: 6px solid #306998;
+            padding-left: 20px;
+        }
+        .subhead {
+            font-size: 1rem;
+            color: #64748b;
+            margin-top: -0.2rem;
+            margin-bottom: 2.2rem;
+            padding-left: 26px;
+            font-weight: 400;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 1.2rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-top: 2.6rem;
+            margin-bottom: 1.2rem;
+            color: #0b2b4f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: "◆";
+            font-size: 1.4rem;
+            color: #ffd43b;
+            font-weight: 300;
+        }
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 0.75rem;
+            color: #1e3a5f;
+        }
+        p { margin-bottom: 1rem; color: #1e293b; }
+        .note {
+            background: #f1f5f9;
+            padding: 1.2rem 1.6rem;
+            border-radius: 18px;
+            border-left: 5px solid #306998;
+            margin: 1.8rem 0;
+            font-size: 0.95rem;
+            color: #1e293b;
+        }
+        .note strong { color: #0b2b4f; }
+        ul, ol { padding-left: 1.8rem; margin-bottom: 1.4rem; }
+        li { margin-bottom: 0.4rem; }
+        .badge {
+            background: #dbeafe;
+            color: #1e4a76;
+            font-weight: 600;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+        .inline-code {
+            background: #eef2f6;
+            padding: 0.2rem 0.6rem;
+            border-radius: 8px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #1e3a5f;
+            border: 1px solid #dce3ec;
+        }
+        .code-block {
+            background: #0b1c2b;
+            color: #e2e8f0;
+            padding: 1.2rem 1.6rem;
+            border-radius: 18px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            border: 1px solid #1e3a5f;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .code-block .cmd { color: #b0d0ff; }
+        .step-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.6rem 1.8rem;
+            margin: 1.8rem 0;
+            border: 1px solid #e2e8f0;
+        }
+        .step-card h4 {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+            color: #0b2b4f;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; gap: 12px; } }
+        .pill {
+            background: #e9edf2;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e3a5f;
+        }
+        hr { border: none; border-top: 1px solid #e2e8f0; margin: 2rem 0; }
+        .footer-note {
+            margin-top: 2.8rem;
+            background: #f1f6fa;
+            padding: 1.4rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            color: #1e3a5f;
+            font-weight: 500;
+            border: 1px solid #dbe4ed;
+        }
+        ul li::marker { color: #306998; }
+        a {
+            color: #1e4a76;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #b9c8da;
+        }
+        a:hover { border-bottom: 2px solid #306998; }
+        .icon-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            margin: 1rem 0 0.5rem 0;
+            align-items: center;
+        }
+        .icon-row .badge { font-size: 0.85rem; }
+        .divider-light { margin: 2rem 0 1.5rem 0; border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🐍 分支与循环 · 实战</h1>
+    <div class="subhead">
+        素数 · 斐波那契 · 水仙花数 · 百钱百鸡 · Craps 赌博游戏
+    </div>
+
+    <p><strong>分支结构和循环结构是构造程序逻辑的基础</strong>，它们的重要性不言而喻。看懂别人的代码很容易，但是要自己写出类似的代码却又很难。只要加强编程练习，通过量的积累来产生质的变化，这个问题迟早都会解决的。下面我们通过几个经典案例来巩固分支与循环的运用。</p>
+
+    <!-- 例1：100以内的素数 -->
+    <h2>📐 例1：100以内的素数</h2>
+    <p>素数指的是只能被 1 和自身整除的正整数（不包括 1）。</p>
+    <div class="code-block">
+        <span class="cmd"># 输出100以内的素数</span>
+        for num in range(2, 100):
+            is_prime = True
+            for i in range(2, int(num ** 0.5) + 1):
+                if num % i == 0:
+                    is_prime = False
+                    break
+            if is_prime:
+                print(num)
+    </div>
+    <div class="note">
+        <strong>💡 优化：</strong> 只需检查到 <span class="inline-code">√num</span> 即可，因子成对出现，可大幅减少循环次数。
+    </div>
+
+    <!-- 例2：斐波那契数列 -->
+    <h2>📐 例2：斐波那契数列</h2>
+    <p>输出斐波那契数列中的前 20 个数。数列特点：前两个数为 1，从第三个数开始，每个数都是前两个数之和。</p>
+    <div class="code-block">
+        <span class="cmd"># 输出斐波那契数列前20项</span>
+        a, b = 0, 1
+        for _ in range(20):
+            a, b = b, a + b
+            print(a)
+    </div>
+    <div class="note">
+        <strong>📌 递推赋值：</strong> <span class="inline-code">a, b = b, a + b</span> 先计算右侧，再同时赋值给左侧，简洁高效。
+    </div>
+
+    <!-- 例3：水仙花数 -->
+    <h2>📐 例3：水仙花数</h2>
+    <p>找出 100 到 999 范围内的所有水仙花数（各位数字的立方和等于该数本身）。</p>
+    <div class="code-block">
+        <span class="cmd"># 三位水仙花数</span>
+        for num in range(100, 1000):
+            low = num % 10
+            mid = num // 10 % 10
+            high = num // 100
+            if num == low ** 3 + mid ** 3 + high ** 3:
+                print(num)
+    </div>
+    <p>利用 <span class="inline-code">//</span> 和 <span class="inline-code">%</span> 拆分数字是常见技巧，也可用于整数反转：</p>
+    <div class="code-block">
+        <span class="cmd"># 正整数反转</span>
+        num = int(input('num = '))
+        reversed_num = 0
+        while num > 0:
+            reversed_num = reversed_num * 10 + num % 10
+            num //= 10
+        print(reversed_num)
+    </div>
+
+    <!-- 例4：百钱百鸡 -->
+    <h2>📐 例4：百钱百鸡问题</h2>
+    <p>公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元三只，用 100 元买 100 只鸡，求各多少只。</p>
+    <div class="step-card">
+        <h4>🧮 穷举法（暴力搜索）</h4>
+        <div class="code-block">
+            for x in range(0, 21):
+                for y in range(0, 34):
+                    z = 100 - x - y
+                    if z % 3 == 0 and 5 * x + 3 * y + z // 3 == 100:
+                        print(f'公鸡: {x}只, 母鸡: {y}只, 小鸡: {z}只')
+        </div>
+        <div class="icon-row">
+            <span class="badge">穷举法</span>
+            <span class="badge">循环优化</span>
+            <span class="badge">条件筛选</span>
+        </div>
+        <div class="note" style="margin-top:0.6rem;">
+            <strong>⚡ 优化思路：</strong> 由 <span class="inline-code">x + y + z = 100</span> 可得 <span class="inline-code">z = 100 - x - y</span>，将三层循环降为两层，效率大幅提升。
+        </div>
+    </div>
+
+    <!-- 例5：CRAPS赌博游戏 -->
+    <h2>🎲 例5：CRAPS 赌博游戏</h2>
+    <p>玩家初始 1000 元，每局下注。第一次摇出 7 或 11 玩家胜，摇出 2、3、12 庄家胜；否则继续摇，若摇出 7 庄家胜，若摇出首次点数玩家胜，否则继续。</p>
+    <div class="code-block">
+        <span class="cmd"># Craps 赌博游戏（核心逻辑）</span>
+        import random
+        money = 1000
+        while money > 0:
+            print(f'总资产: {money}元')
+            debt = int(input('请下注: '))
+            first_point = random.randrange(1, 7) + random.randrange(1, 7)
+            print(f'玩家摇出了{first_point}点')
+            if first_point in (7, 11):
+                money += debt
+                print('玩家胜!\n')
+            elif first_point in (2, 3, 12):
+                money -= debt
+                print('庄家胜!\n')
+            else:
+                while True:
+                    cur = random.randrange(1, 7) + random.randrange(1, 7)
+                    print(f'玩家摇出了{cur}点')
+                    if cur == 7:
+                        money -= debt
+                        print('庄家胜!\n')
+                        break
+                    elif cur == first_point:
+                        money += debt
+                        print('玩家胜!\n')
+                        break
+        print('你破产了, 游戏结束!')
+    </div>
+    <div class="note">
+        <strong>🎯 要点：</strong> 外层 <span class="inline-code">while</span> 控制游戏进行，内层 <span class="inline-code">while</span> 处理追加摇骰。使用 <span class="inline-code">in</span> 运算符简化多个条件的判断。
+    </div>
+
+    <hr>
+
+    <h2>📌 总结</h2>
+    <ul style="font-size: 1.05rem; list-style-type: '✓   '; padding-left: 2rem;">
+        <li style="margin-bottom: 0.6rem;">分支与循环是程序逻辑的基石，必须通过大量练习融会贯通。</li>
+        <li style="margin-bottom: 0.6rem;">经典案例：素数、斐波那契、水仙花数、百钱百鸡、CRAPS 游戏。</li>
+        <li style="margin-bottom: 0.6rem;">穷举法（暴力搜索）是解决问题的有效手段，配合条件优化可提升效率。</li>
+        <li style="margin-bottom: 0.6rem;">CRAPS 游戏综合运用了分支、循环、随机数，可作为阶段性检验标准。</li>
+    </ul>
+
+    <div class="footer-note">
+        🚀 如果你能顺利写出 CRAPS 游戏，说明分支与循环已经掌握！继续加油，编程之路越走越宽。
+    </div>
+
+</div>
+</body>
+</html>

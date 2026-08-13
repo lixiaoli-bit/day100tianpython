@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分支结构 · 课程笔记</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f7f9fc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.03);
+            padding: 48px 56px;
+            transition: all 0.2s;
+        }
+        @media (max-width: 720px) {
+            .container { padding: 28px 20px; border-radius: 24px; }
+        }
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, #0b2b4f, #1e4a76);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 0.2rem;
+            margin-bottom: 0.25rem;
+            border-left: 6px solid #306998;
+            padding-left: 20px;
+        }
+        .subhead {
+            font-size: 1rem;
+            color: #64748b;
+            margin-top: -0.2rem;
+            margin-bottom: 2.2rem;
+            padding-left: 26px;
+            font-weight: 400;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 1.2rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-top: 2.6rem;
+            margin-bottom: 1.2rem;
+            color: #0b2b4f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: "◆";
+            font-size: 1.4rem;
+            color: #ffd43b;
+            font-weight: 300;
+        }
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 0.75rem;
+            color: #1e3a5f;
+        }
+        p { margin-bottom: 1rem; color: #1e293b; }
+        .note {
+            background: #f1f5f9;
+            padding: 1.2rem 1.6rem;
+            border-radius: 18px;
+            border-left: 5px solid #306998;
+            margin: 1.8rem 0;
+            font-size: 0.95rem;
+            color: #1e293b;
+        }
+        .note strong { color: #0b2b4f; }
+        ul, ol { padding-left: 1.8rem; margin-bottom: 1.4rem; }
+        li { margin-bottom: 0.4rem; }
+        .badge {
+            background: #dbeafe;
+            color: #1e4a76;
+            font-weight: 600;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+        .inline-code {
+            background: #eef2f6;
+            padding: 0.2rem 0.6rem;
+            border-radius: 8px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #1e3a5f;
+            border: 1px solid #dce3ec;
+        }
+        .code-block {
+            background: #0b1c2b;
+            color: #e2e8f0;
+            padding: 1.2rem 1.6rem;
+            border-radius: 18px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            border: 1px solid #1e3a5f;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .code-block .cmd { color: #b0d0ff; }
+        .step-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.6rem 1.8rem;
+            margin: 1.8rem 0;
+            border: 1px solid #e2e8f0;
+        }
+        .step-card h4 {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+            color: #0b2b4f;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; gap: 12px; } }
+        .pill {
+            background: #e9edf2;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e3a5f;
+        }
+        hr { border: none; border-top: 1px solid #e2e8f0; margin: 2rem 0; }
+        .footer-note {
+            margin-top: 2.8rem;
+            background: #f1f6fa;
+            padding: 1.4rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            color: #1e3a5f;
+            font-weight: 500;
+            border: 1px solid #dbe4ed;
+        }
+        ul li::marker { color: #306998; }
+        a {
+            color: #1e4a76;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #b9c8da;
+        }
+        a:hover { border-bottom: 2px solid #306998; }
+        .icon-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            margin: 1rem 0 0.5rem 0;
+            align-items: center;
+        }
+        .icon-row .badge { font-size: 0.85rem; }
+        .divider-light { margin: 2rem 0 1.5rem 0; border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🐍 分支结构</h1>
+    <div class="subhead">
+        if · elif · else · match · case · 选择与决策
+    </div>
+
+    <p>迄今为止，我们写的 Python 程序都是一条一条语句按顺序向下执行的，这种代码结构叫做<strong>顺序结构</strong>。然而仅有顺序结构并不能解决所有的问题，比如我们设计一个游戏，游戏第一关的过关条件是玩家获得 1000 分，那么在第一关完成后，我们要根据玩家得到的分数来决定是进入第二关，还是告诉玩家“Game Over”。在这种场景下，我们的代码就会产生两个分支，而且只有一个会被执行。我们将这种结构称之为“<strong>分支结构</strong>”或“<strong>选择结构</strong>”。</p>
+
+    <!-- if-else -->
+    <h2>if 与 else 构造分支</h2>
+    <p>在 Python 中，构造分支结构最常用的是 <span class="inline-code">if</span>、<span class="inline-code">elif</span> 和 <span class="inline-code">else</span> 三个关键字。下面以 BMI 计算器为例，展示分支结构的用法。</p>
+
+    <div class="step-card">
+        <h4>📊 BMI 计算器 (v1.0) — 简单 if</h4>
+        <p>公式：<span class="inline-code">BMI = 体重(kg) / (身高(m))²</span>，正常范围 18.5 ≤ BMI &lt; 24。</p>
+        <div class="code-block">
+            height = float(input('身高(cm)：'))
+            weight = float(input('体重(kg)：'))
+            bmi = weight / (height / 100) ** 2
+            print(f'{bmi = :.1f}')
+            if 18.5 <= bmi < 24:
+                print('你的身材很棒！')
+        </div>
+        <div class="icon-row">
+            <span class="badge">if 条件</span>
+            <span class="badge">缩进代码块</span>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>💡 缩进与代码块：</strong> Python 使用缩进表示代码层次，<span class="inline-code">if</span> 条件成立时，下方缩进的语句会被执行。通常使用 4 个空格，不要使用 Tab 键。
+    </div>
+
+    <div class="step-card">
+        <h4>📊 BMI 计算器 (v1.1) — if + else</h4>
+        <div class="code-block">
+            if 18.5 <= bmi < 24:
+                print('你的身材很棒！')
+            else:
+                print('你的身材不够标准哟！')
+        </div>
+    </div>
+
+    <div class="step-card">
+        <h4>📊 BMI 计算器 (v1.2) — if + elif + else</h4>
+        <div class="code-block">
+            if bmi < 18.5:
+                print('你的体重过轻！')
+            elif bmi < 24:
+                print('你的身材很棒！')
+            elif bmi < 27:
+                print('你的体重过重！')
+            elif bmi < 30:
+                print('你已轻度肥胖！')
+            elif bmi < 35:
+                print('你已中度肥胖！')
+            else:
+                print('你已重度肥胖！')
+        </div>
+        <div class="icon-row">
+            <span class="badge">多分支</span>
+            <span class="badge">条件互斥</span>
+        </div>
+    </div>
+
+    <!-- match-case -->
+    <h2>match 与 case — 模式匹配</h2>
+    <p>Python 3.10 引入了 <span class="inline-code">match</span> 和 <span class="inline-code">case</span> 关键字，提供更优雅的多分支结构。以下是对 HTTP 状态码进行分类的例子。</p>
+
+    <div class="grid-2">
+        <div style="background: #f8fafc; padding: 1.2rem 1.4rem; border-radius: 20px; border:1px solid #e2e8f0;">
+            <h4 style="margin-top:0;">🔹 if-elif 版本</h4>
+            <div class="code-block" style="margin:0.4rem 0; font-size:0.8rem;">
+                if status == 400: desc = 'Bad Request'
+                elif status == 401: desc = 'Unauthorized'
+                elif status == 403: desc = 'Forbidden'
+                elif status == 404: desc = 'Not Found'
+                else: desc = 'Unknown'
+            </div>
+        </div>
+        <div style="background: #f8fafc; padding: 1.2rem 1.4rem; border-radius: 20px; border:1px solid #e2e8f0;">
+            <h4 style="margin-top:0;">🔸 match-case 版本</h4>
+            <div class="code-block" style="margin:0.4rem 0; font-size:0.8rem;">
+                match status:
+                    case 400: desc = 'Bad Request'
+                    case 401: desc = 'Unauthorized'
+                    case 403: desc = 'Forbidden'
+                    case 404: desc = 'Not Found'
+                    case _: desc = 'Unknown'
+            </div>
+        </div>
+    </div>
+    <div class="note">
+        <strong>📌 通配符 <span class="inline-code">case _</span>：</strong> 类似 switch 中的 default，匹配所有未覆盖的情况。可以合并多个模式，如 <span class="inline-code">case 401 | 403 | 404</span>。
+    </div>
+
+    <!-- 应用实例 -->
+    <h2>应用实例</h2>
+
+    <div class="step-card">
+        <h4>📐 例1：分段函数求值</h4>
+        <p style="margin-bottom:0.6rem;">
+            y = 3x-5 (x&gt;1) ｜ y = x+2 (-1≤x≤1) ｜ y = 5x+3 (x&lt;-1)
+        </p>
+        <div class="code-block">
+            x = float(input('x = '))
+            if x > 1:
+                y = 3 * x - 5
+            elif x >= -1:
+                y = x + 2
+            else:
+                y = 5 * x + 3
+            print(f'{y = }')
+        </div>
+        <div class="note" style="margin-top:0.6rem;">
+            <strong>💡 扁平 vs 嵌套：</strong> Python 之禅说 “Flat is better than nested”，尽量让分支扁平化，避免深层嵌套。
+        </div>
+    </div>
+
+    <div class="step-card">
+        <h4>📝 例2：百分制成绩转等级</h4>
+        <p>A (≥90) ｜ B (≥80) ｜ C (≥70) ｜ D (≥60) ｜ E (&lt;60)</p>
+        <div class="code-block">
+            score = float(input('请输入成绩: '))
+            if score >= 90:
+                grade = 'A'
+            elif score >= 80:
+                grade = 'B'
+            elif score >= 70:
+                grade = 'C'
+            elif score >= 60:
+                grade = 'D'
+            else:
+                grade = 'E'
+            print(f'{grade = }')
+        </div>
+    </div>
+
+    <div class="step-card">
+        <h4>📐 例3：判断三角形并计算周长面积</h4>
+        <p>输入三边，判断是否构成三角形，若成立则用海伦公式计算面积。</p>
+        <div class="code-block">
+            a = float(input('a = '))
+            b = float(input('b = '))
+            c = float(input('c = '))
+            if a + b > c and a + c > b and b + c > a:
+                perimeter = a + b + c
+                s = perimeter / 2
+                area = (s * (s - a) * (s - b) * (s - c)) ** 0.5
+                print(f'周长: {perimeter}')
+                print(f'面积: {area}')
+            else:
+                print('不能构成三角形')
+        </div>
+        <div class="icon-row">
+            <span class="badge">海伦公式</span>
+            <span class="badge">条件组合</span>
+        </div>
+    </div>
+
+    <!-- 嵌套分支 -->
+    <h2>嵌套分支</h2>
+    <p>在 <span class="inline-code">if</span>、<span class="inline-code">elif</span> 或 <span class="inline-code">else</span> 代码块中再构造分支，称为嵌套分支。但为了可读性，应尽量避免过深嵌套。</p>
+    <div class="code-block">
+        <span class="cmd"># 分段函数求值（嵌套写法）</span>
+        if x > 1:
+            y = 3 * x - 5
+        else:
+            if x >= -1:
+                y = x + 2
+            else:
+                y = 5 * x + 3
+    </div>
+
+    <hr>
+
+    <h2>📌 总结</h2>
+    <ul style="font-size: 1.05rem; list-style-type: '✓   '; padding-left: 2rem;">
+        <li style="margin-bottom: 0.6rem;">分支结构通过 <span class="inline-code">if</span>、<span class="inline-code">elif</span>、<span class="inline-code">else</span> 实现，Python 使用缩进区分代码块。</li>
+        <li style="margin-bottom: 0.6rem;">Python 3.10+ 支持 <span class="inline-code">match</span> 和 <span class="inline-code">case</span> 实现模式匹配，代码更简洁。</li>
+        <li style="margin-bottom: 0.6rem;">分支结构可以嵌套，但应保持扁平化，提高可读性。</li>
+        <li style="margin-bottom: 0.6rem;">实际应用：BMI 计算、分段函数、成绩转换、三角形判断等。</li>
+    </ul>
+
+    <div class="footer-note">
+        🚀 分支结构让程序拥有决策能力，下一课我们将学习循环结构，让代码重复执行！
+    </div>
+
+</div>
+</body>
+</html>

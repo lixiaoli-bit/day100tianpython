@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python语言中的运算符 · 课程笔记</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f9fc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.03);
+            padding: 48px 56px;
+            transition: all 0.2s;
+        }
+
+        @media (max-width: 720px) {
+            .container {
+                padding: 28px 20px;
+                border-radius: 24px;
+            }
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, #0b2b4f, #1e4a76);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 0.2rem;
+            margin-bottom: 0.25rem;
+            border-left: 6px solid #306998;
+            padding-left: 20px;
+        }
+
+        .subhead {
+            font-size: 1rem;
+            color: #64748b;
+            margin-top: -0.2rem;
+            margin-bottom: 2.2rem;
+            padding-left: 26px;
+            font-weight: 400;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 1.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-top: 2.6rem;
+            margin-bottom: 1.2rem;
+            color: #0b2b4f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: "◆";
+            font-size: 1.4rem;
+            color: #ffd43b;
+            font-weight: 300;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 0.75rem;
+            color: #1e3a5f;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .note {
+            background: #f1f5f9;
+            padding: 1.2rem 1.6rem;
+            border-radius: 18px;
+            border-left: 5px solid #306998;
+            margin: 1.8rem 0;
+            font-size: 0.95rem;
+            color: #1e293b;
+        }
+
+        .note strong {
+            color: #0b2b4f;
+        }
+
+        ul, ol {
+            padding-left: 1.8rem;
+            margin-bottom: 1.4rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        .badge {
+            background: #dbeafe;
+            color: #1e4a76;
+            font-weight: 600;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+
+        .inline-code {
+            background: #eef2f6;
+            padding: 0.2rem 0.6rem;
+            border-radius: 8px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #1e3a5f;
+            border: 1px solid #dce3ec;
+        }
+
+        .code-block {
+            background: #0b1c2b;
+            color: #e2e8f0;
+            padding: 1.2rem 1.6rem;
+            border-radius: 18px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            border: 1px solid #1e3a5f;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .code-block .cmd {
+            color: #b0d0ff;
+        }
+
+        .step-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.6rem 1.8rem;
+            margin: 1.8rem 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .step-card h4 {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+            color: #0b2b4f;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 700px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        .pill {
+            background: #e9edf2;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e3a5f;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 2rem 0;
+        }
+
+        .footer-note {
+            margin-top: 2.8rem;
+            background: #f1f6fa;
+            padding: 1.4rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            color: #1e3a5f;
+            font-weight: 500;
+            border: 1px solid #dbe4ed;
+        }
+
+        ul li::marker {
+            color: #306998;
+        }
+
+        a {
+            color: #1e4a76;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #b9c8da;
+        }
+
+        a:hover {
+            border-bottom: 2px solid #306998;
+        }
+
+        .icon-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            margin: 1rem 0 0.5rem 0;
+            align-items: center;
+        }
+        .icon-row .badge {
+            font-size: 0.85rem;
+        }
+
+        .divider-light {
+            margin: 2rem 0 1.5rem 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            background: #fafcff;
+        }
+        th {
+            background: #eef2f6;
+            color: #0b2b4f;
+            font-weight: 600;
+            padding: 0.9rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #dce3ec;
+        }
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e9edf2;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .op-highlight {
+            background: #f1f5f9;
+            border-radius: 6px;
+            padding: 0.1rem 0.5rem;
+            font-family: 'SF Mono', monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🐍 Python 语言中的运算符</h1>
+    <div class="subhead">
+        算术 · 赋值 · 比较 · 逻辑 · 表达式实战
+    </div>
+
+    <!-- 引言 -->
+    <p>Python 语言支持很多种运算符，有了变量和运算符，我们就可以构造各种各样的表达式来解决实际问题。在计算机科学中，<strong>表达式是计算机程序中的句法实体，它由一个或多个常量、变量、函数和运算符组合而成</strong>。不管使用什么样的编程语言，构造表达式都是非常重要的。</p>
+
+    <!-- 运算符优先级表格 -->
+    <h2>运算符优先级</h2>
+    <p>下表按照优先级从高到低罗列了 Python 中的常用运算符。如果搞不清楚优先级，可以使用圆括号 <span class="inline-code">()</span> 来确保运算顺序。</p>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>运算符</th><th>描述</th></tr></thead>
+            <tbody>
+                <tr><td><span class="inline-code">[]</span> <span class="inline-code">[:]</span></td><td>索引、切片</td></tr>
+                <tr><td><span class="inline-code">**</span></td><td>幂</td></tr>
+                <tr><td><span class="inline-code">~</span> <span class="inline-code">+</span> <span class="inline-code">-</span></td><td>按位取反、正号、负号</td></tr>
+                <tr><td><span class="inline-code">*</span> <span class="inline-code">/</span> <span class="inline-code">%</span> <span class="inline-code">//</span></td><td>乘、除、模、整除</td></tr>
+                <tr><td><span class="inline-code">+</span> <span class="inline-code">-</span></td><td>加、减</td></tr>
+                <tr><td><span class="inline-code">>></span> <span class="inline-code"><<</span></td><td>右移、左移</td></tr>
+                <tr><td><span class="inline-code">&</span></td><td>按位与</td></tr>
+                <tr><td><span class="inline-code">^</span> <span class="inline-code">|</span></td><td>按位异或、按位或</td></tr>
+                <tr><td><span class="inline-code"><=</span> <span class="inline-code"><</span> <span class="inline-code">></span> <span class="inline-code">>=</span></td><td>小于等于、小于、大于、大于等于</td></tr>
+                <tr><td><span class="inline-code">==</span> <span class="inline-code">!=</span></td><td>等于、不等于</td></tr>
+                <tr><td><span class="inline-code">is</span> <span class="inline-code">is not</span></td><td>身份运算符</td></tr>
+                <tr><td><span class="inline-code">in</span> <span class="inline-code">not in</span></td><td>成员运算符</td></tr>
+                <tr><td><span class="inline-code">not</span> <span class="inline-code">or</span> <span class="inline-code">and</span></td><td>逻辑运算符</td></tr>
+                <tr><td><span class="inline-code">=</span> <span class="inline-code">+=</span> <span class="inline-code">-=</span> ...</td><td>赋值运算符（复合赋值）</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="note">
+        <strong>💡 优先级提示：</strong> 赋值运算符的优先级最低，算术运算符的优先级高于比较运算符，比较运算符的优先级高于逻辑运算符。不确定时，多用圆括号 <span class="inline-code">()</span> 明确顺序。
+    </div>
+
+    <!-- 算术运算符 -->
+    <h2>算术运算符</h2>
+    <p>Python 中的算术运算符非常丰富，包括加、减、乘、除、整除、求模（余数）和求幂。</p>
+    <div class="code-block">
+        <span class="cmd"># 算术运算符示例</span>
+        print(321 + 12)     # 333
+        print(321 - 12)     # 309
+        print(321 * 12)     # 3852
+        print(321 / 12)     # 26.75
+        print(321 // 12)    # 26  (整除)
+        print(321 % 12)     # 9   (余数)
+        print(321 ** 12)    # 幂运算
+    </div>
+    <p>算术运算遵循先乘除后加减，求幂优先级高于乘除。使用圆括号可以改变优先级：</p>
+    <div class="code-block">
+        <span class="cmd"># 优先级演示</span>
+        print(2 + 3 * 5)           # 17
+        print((2 + 3) * 5)         # 25
+        print((2 + 3) * 5 ** 2)    # 125
+        print(((2 + 3) * 5) ** 2)  # 625
+    </div>
+
+    <!-- 赋值运算符 -->
+    <h2>赋值运算符</h2>
+    <p>赋值运算符 <span class="inline-code">=</span> 将右边的值赋给左边的变量。复合赋值运算符如 <span class="inline-code">+=</span>、<span class="inline-code">-=</span> 等，可以简化代码。</p>
+    <div class="code-block">
+        <span class="cmd"># 赋值与复合赋值</span>
+        a = 10
+        b = 3
+        a += b        # a = a + b
+        a *= a + 2    # a = a * (a + 2)
+        print(a)      # 大家算一下这里会输出什么
+    </div>
+    <div class="note">
+        <strong>🐘 海象运算符 <span class="inline-code">:=</span>：</strong> Python 3.8 引入，可以将值赋给变量，同时该值作为表达式的结果。例如 <span class="inline-code">print((a := 10))</span> 会输出 10。但要注意 <span class="inline-code">print(a = 10)</span> 会引发语法错误。
+    </div>
+
+    <!-- 比较与逻辑 -->
+    <h2>比较运算符与逻辑运算符</h2>
+    <p>比较运算符包括 <span class="inline-code">==</span>、<span class="inline-code">!=</span>、<span class="inline-code"><</span>、<span class="inline-code">></span>、<span class="inline-code"><=</span>、<span class="inline-code">>=</span>，结果均为布尔值（<span class="inline-code">True</span> / <span class="inline-code">False</span>）。逻辑运算符 <span class="inline-code">and</span>、<span class="inline-code">or</span>、<span class="inline-code">not</span> 用于组合布尔值，支持短路求值。</p>
+    <div class="code-block">
+        <span class="cmd"># 比较与逻辑运算</span>
+        flag0 = 1 == 1          # True
+        flag1 = 3 > 2           # True
+        flag2 = 2 < 1           # False
+        flag3 = flag1 and flag2 # False
+        flag4 = flag1 or flag2  # True
+        flag5 = not flag0       # False
+        print(flag0, flag1, flag2, flag3, flag4, flag5)
+        print(flag1 and not flag2)  # True
+        print(1 > 2 or 2 == 3)      # False
+    </div>
+
+    <!-- 应用实例 -->
+    <h2>应用实例</h2>
+
+    <div class="step-card">
+        <h4>🌡️ 例1：华氏温度转摄氏温度</h4>
+        <p>公式：<span class="inline-code">C = (F - 32) / 1.8</span></p>
+        <div class="code-block">
+            f = float(input('请输入华氏温度: '))
+            c = (f - 32) / 1.8
+            print(f'{f:.1f}华氏度 = {c:.1f}摄氏度')
+        </div>
+        <div class="icon-row">
+            <span class="badge">input</span>
+            <span class="badge">float</span>
+            <span class="badge">f-string</span>
+        </div>
+    </div>
+
+    <div class="step-card">
+        <h4>⭕ 例2：计算圆的周长和面积</h4>
+        <p>半径 <span class="inline-code">r</span>，周长 <span class="inline-code">2πr</span>，面积 <span class="inline-code">πr²</span>，使用 <span class="inline-code">math.pi</span> 获取圆周率。</p>
+        <div class="code-block">
+            import math
+            radius = float(input('请输入圆的半径: '))
+            perimeter = 2 * math.pi * radius
+            area = math.pi * radius ** 2
+            print(f'周长: {perimeter:.2f}')
+            print(f'面积: {area:.2f}')
+        </div>
+        <p>Python 3.8+ 支持 <span class="inline-code">f'{perimeter = :.2f}'</span> 同时输出变量名和值。</p>
+    </div>
+
+    <div class="step-card">
+        <h4>📅 例3：判断闰年</h4>
+        <p>公历闰年规则：能被4整除但不能被100整除，或者能被400整除。</p>
+        <div class="code-block">
+            year = int(input('请输入年份: '))
+            is_leap = year % 4 == 0 and year % 100 != 0 or year % 400 == 0
+            print(f'{is_leap = }')
+        </div>
+        <div class="note" style="margin-top: 0.6rem;">
+            <strong>📌 注意：</strong> 格里历（公历）于1582年引入，输入年份应在此之后。逻辑组合中 <span class="inline-code">and</span> 优先级高于 <span class="inline-code">or</span>，但此处用括号更加清晰。
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- 总结 -->
+    <h2>📌 总结</h2>
+    <ul style="font-size: 1.05rem; list-style-type: '✓   '; padding-left: 2rem;">
+        <li style="margin-bottom: 0.6rem;">运算符是构造表达式的核心，掌握优先级和结合性非常重要。</li>
+        <li style="margin-bottom: 0.6rem;">算术运算符：<span class="inline-code">+</span> <span class="inline-code">-</span> <span class="inline-code">*</span> <span class="inline-code">/</span> <span class="inline-code">//</span> <span class="inline-code">%</span> <span class="inline-code">**</span></li>
+        <li style="margin-bottom: 0.6rem;">赋值运算符（包括复合赋值）和比较/逻辑运算符是编写条件逻辑的基础。</li>
+        <li style="margin-bottom: 0.6rem;">通过实际例子（温度转换、圆的计算、闰年判断）巩固了运算符的应用。</li>
+    </ul>
+
+    <div class="footer-note">
+        🚀 运算符是编程的“计算器”，接下来我们将用它们解决更复杂的问题！
+    </div>
+
+</div>
+</body>
+</html>
