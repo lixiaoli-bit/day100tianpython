@@ -1,9 +1,9 @@
 <!-- _coverpage.md -->
 
-# 小杰社长de技术文档
+# 阿少社长de技术文档
 > 这是一份计算机技术学习资料
 
-- Copyright © 2023 小杰社长 All Rights Reserved.
+- Copyright © 2023 阿少社长 All Rights Reserved.
 
-<!-- [小杰社长](https://space.bilibili.com/1100962821) -->
+<!-- [阿少社长](https://space.bilibili.com/1100962821) -->
 [开始阅读](README.md)
