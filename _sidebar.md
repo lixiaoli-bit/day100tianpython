@@ -61,7 +61,7 @@
   * [📡 精通python-第48天 静态资源和Ajax请求](./python100/Day46-60/48.静态资源和Ajax请求.md)
   * [🍪 精通python-第49天 Cookie和Session](./python100/Day46-60/49.Cookie和Session.md)
   * [🎨 精通python-第50天 模板语法](./python100/Day46-60/50.制作报表.md)
-  * [📝 精通python-第51天 日志和调试工具](./python100/Day46-60/51.日志和调试工具.md)
+  * [📝 精通python-第51天 日志和调试工具](./python100/Day46-60/51.日志和调试工具栏.md)
   * [🔗 精通python-第52天 中间件应用](./python100/Day46-60/52.中间件的应用.md)
   * [🔄 精通python-第53天 前后端分离开发](./python100/Day46-60/53.前后端分离开发入门.md)
   * [🌐 精通python-第54天 RESTful架构与DRF入门](./python100/Day46-60/54.RESTful架构和DRF入门.md)
