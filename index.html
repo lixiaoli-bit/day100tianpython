@@ -48,6 +48,14 @@
             sidebarDisplayLevel: 1,
             subMaxLevel: 2, // 侧边栏只显示到第2层，第3层完全不出现
             baiduTjId: "c5f1451ab2a384a8e5ebe2af80c62f3",  // 百度统计
+            // ... 你的其他配置 (包括 search 保持不变)
+            beforeEach: function(route, next) {
+    // 给所有 .md 文件的请求路径加上随机时间戳
+    if (route.path.endsWith('.md')) {
+      route.path = route.path + '?t=' + Date.now();
+    }
+    next();
+  },
             /*搜索相关设置*/
             search: {
                 maxAge: 0,// 过期时间，单位毫秒，默认一天86400000
