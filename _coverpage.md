@@ -8,4 +8,6 @@
 [全栈课程前端](https://zero-to-tech.pages.dev/main)
 [全栈课程后端](https://zero-to-tech.pages.dev/backend/hzong.html)
 [python小记](https://pythonxiaoji.pages.dev/)
+[待上线](/)
 [100天python开始阅读](README.md)
+
