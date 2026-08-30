@@ -21,7 +21,7 @@
     <!-- <link rel="stylesheet" href="./themes/dolphin.css"> -->
     <!-- <link rel="stylesheet" href="./themes/pure.css"> -->
     <!-- 👇 你的自定义 CSS 写在这里 -->
-  <!-- <style>
+  <style>
   /* 只要是导航里的链接，全绿 */
   nav a,
   .app-nav a,
@@ -41,54 +41,6 @@
   #app-nav-mobile {
     background: none !important;
     background-color: transparent !important;
-  }
-</style> -->
-<style>
-  /* 1. 强制导航栏在页面顶部居中（相对于整个视口） */
-  .app-nav {
-    position: fixed !important;         /* 固定定位，脱离文档流，不受侧边栏影响 */
-    top: 10px !important;              /* 距离顶部10px，可调整 */
-    left: 0 !important;                /* 拉伸到整个屏幕宽度 */
-    right: 0 !important;
-    display: flex !important;          /* 使用flex布局 */
-    justify-content: center !important; /* 水平居中 */
-    align-items: center !important;    /* 垂直居中 */
-    background: transparent !important; /* 容器本身透明 */
-    z-index: 999 !important;           /* 确保在其他元素之上 */
-    width: 100% !important;
-    float: none !important;            /* 清除默认的右浮动 */
-    padding: 0 !important;
-    margin: 0 !important;
-    pointer-events: none !important;   /* 让容器本身不拦截点击，使点击能穿透到链接 */
-  }
-
-  /* 2. 让导航链接可以响应点击，并应用绿色背景样式 */
-  .app-nav a {
-    pointer-events: auto !important;   /* 恢复链接的点击功能 */
-    display: inline-block !important;
-    background-color: #42b983 !important; /* 经典绿 */
-    padding: 4px 16px !important;        /* 内边距，控制背景大小 */
-    border-radius: 20px !important;      /* 圆角 */
-    color: #fff !important;              /* 白色文字 */
-    margin: 0 6px !important;            /* 链接之间的间距 */
-    text-decoration: none !important;
-    font-size: 14px !important;          /* 调整字体大小，如果需要 */
-    white-space: nowrap !important;      /* 防止文字换行 */
-  }
-
-  /* 3. 清除其他可能出现的导航容器背景（兼容手机版，尽管您已设置合并） */
-  nav,
-  .app-nav-dropdown,
-  #app-nav-mobile {
-    background: none !important;
-    background-color: transparent !important;
-  }
-  
-  /* 4. 如果有一个外层包裹，也确保它不干扰 */
-  .app-nav-wrap {
-    background: none !important;
-    background-color: transparent !important;
-    text-align: center !important;
   }
 </style>
 </head>
