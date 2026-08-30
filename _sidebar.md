@@ -1,6 +1,6 @@
 <!-- _sidebar.md -->
-* 📖 写在最前面
-  * [📌 前言](README.md)
+<!-- * 📖 写在最前面
+  * [📌 前言](README.md) -->
 
 * 🚀 Day01~20 - Python语言基础
   * [🐍 精通python-第1天 初识Python](./python100/Day01-20/01.初识Python.md) 
