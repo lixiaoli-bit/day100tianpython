@@ -22,21 +22,27 @@
     <!-- <link rel="stylesheet" href="./themes/pure.css"> -->
     <!-- 👇 你的自定义 CSS 写在这里 -->
   <style>
-    .app-nav a {
-  background-color: #42b983 !important;
-  padding: 6px 20px !important;
-  border-radius: 20px !important;
-  color: #fff !important;
-  display: inline-block !important;
-}
+  /* 只要是导航里的链接，全绿 */
+  nav a,
+  .app-nav a,
+  .app-nav-dropdown a,
+  #app-nav-mobile a {
+    background-color: #42b983 !important;
+    padding: 4px 16px !important;
+    border-radius: 20px !important;
+    color: #fff !important;
+    display: inline-block !important;
+  }
 
-/* 把导航容器背景清掉 */
-.app-nav {
-  background: none !important;
-}
-    }
-  </style>
-  <!-- 👆 到这里 -->
+  /* 清掉所有导航容器的背景 */
+  nav,
+  .app-nav,
+  .app-nav-dropdown,
+  #app-nav-mobile {
+    background: none !important;
+    background-color: transparent !important;
+  }
+</style>
 </head>
 
 <body>
